@@ -14,8 +14,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Responses starter app",
-  description: "Starter app for the OpenAI Responses API",
+  title: "AI Assistant - Your Intelligent Chat Companion",
+  description: "AI-powered chat assistant with advanced capabilities. Get started for free or upgrade for more features.",
   icons: {
     icon: "/openai_logo.svg",
   },
@@ -27,12 +27,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark bg-background">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="flex h-screen bg-gray-200 w-full flex-col  text-stone-900">
-          <main>{children}</main>
+        <div className="flex min-h-screen bg-background w-full flex-col text-foreground">
+          <main className="flex-1">{children}</main>
         </div>
       </body>
     </html>

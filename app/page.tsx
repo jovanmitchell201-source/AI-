@@ -1,9 +1,10 @@
 "use client";
 import Assistant from "@/components/assistant";
 import ToolsPanel from "@/components/tools-panel";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import useConversationStore from "@/stores/useConversationStore";
 
 export default function Main() {
@@ -23,7 +24,22 @@ export default function Main() {
   }, [router, resetConversation]);
 
   return (
-    <div className="flex justify-center h-screen">
+    <div className="flex flex-col h-screen">
+      {/* Upgrade Banner */}
+      <div className="flex items-center justify-between px-4 py-2 border-b border-border bg-card">
+        <Link href="/" className="text-sm font-medium text-foreground">
+          AI Assistant
+        </Link>
+        <Link
+          href="/pricing"
+          className="inline-flex items-center gap-1.5 rounded-full bg-accent px-3 py-1 text-xs font-medium text-accent-foreground hover:bg-accent/90 transition-colors"
+        >
+          <Sparkles className="h-3 w-3" />
+          Upgrade
+        </Link>
+      </div>
+      
+      <div className="flex flex-1 justify-center overflow-hidden">
       <div className="w-full md:w-[70%]">
         <Assistant />
       </div>
@@ -38,15 +54,16 @@ export default function Main() {
       </div>
       {/* Overlay panel for ToolsPanel on small screens */}
       {isToolsPanelOpen && (
-        <div className="fixed inset-0 z-50 flex justify-end bg-black bg-opacity-30">
-          <div className="w-full bg-white h-full p-4">
-            <button className="mb-4" onClick={() => setIsToolsPanelOpen(false)}>
+        <div className="fixed inset-0 z-50 flex justify-end bg-black/30">
+          <div className="w-full bg-card h-full p-4">
+            <button className="mb-4 text-foreground" onClick={() => setIsToolsPanelOpen(false)}>
               <X size={24} />
             </button>
             <ToolsPanel />
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 }
